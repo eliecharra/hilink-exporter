@@ -50,6 +50,6 @@ hilink_wan{WanIPAddress="",WanIPv6Address=""} 1
 
 ## Supported devices
 
-:warning: This list of device is not exhaustive
+:warning: list not exhaustive
 
 - B525s-23a
