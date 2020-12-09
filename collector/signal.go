@@ -7,19 +7,19 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type signalInfoCollector struct {
+type signalCollector struct {
 	RSSI *prometheus.Desc
 	RSRP *prometheus.Desc
 	RSRQ *prometheus.Desc
 	SINR *prometheus.Desc
 }
 
-func newSignalInfoCollector() hilinkCollector {
+func newSignalCollector() hilinkCollector {
 
-	return &signalInfoCollector{
+	return &signalCollector{
 		RSSI: prometheus.NewDesc(
 			prometheus.BuildFQName(namespace, "signal", "rssi"),
-			"Received Signal Strength Indicator (dB)",
+			"Received Signal Strength Indicator (dBm)",
 			nil,
 			nil,
 		),
@@ -44,14 +44,14 @@ func newSignalInfoCollector() hilinkCollector {
 	}
 }
 
-func (c *signalInfoCollector) describe(ch chan<- *prometheus.Desc) {
+func (c *signalCollector) describe(ch chan<- *prometheus.Desc) {
 	ch <- c.RSSI
 	ch <- c.RSRP
 	ch <- c.RSRQ
 	ch <- c.SINR
 }
 
-func (c *signalInfoCollector) collect(ctx *collectorContext) error {
+func (c *signalCollector) collect(ctx *collectorContext) error {
 
 	log.Debug("Collecting signal info")
 

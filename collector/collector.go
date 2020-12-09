@@ -104,15 +104,15 @@ func (c *collector) Collect(ch chan<- prometheus.Metric) {
 func NewCollector(opts Options) prometheus.Collector {
 
 	collectors := []hilinkCollector{
-		newDeviceInfoCollector(),
+		newDeviceCollector(),
 	}
 
 	if opts.EnableSignal {
-		collectors = append(collectors, newSignalInfoCollector())
+		collectors = append(collectors, newSignalCollector())
 	}
 
 	if opts.EnableTraffic {
-		collectors = append(collectors, newTrafficInfoCollector())
+		collectors = append(collectors, newTrafficCollector())
 	}
 
 	if opts.EnableWan {

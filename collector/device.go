@@ -5,18 +5,18 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type deviceInfoCollector struct {
+type deviceCollector struct {
 	desc  *prometheus.Desc
 	props []string
 }
 
-func newDeviceInfoCollector() hilinkCollector {
+func newDeviceCollector() hilinkCollector {
 
 	props := []string{"DeviceName", "HardwareVersion", "SoftwareVersion", "MacAddress1", "MacAddress2", "Imei"}
 
-	return &deviceInfoCollector{
+	return &deviceCollector{
 		desc: prometheus.NewDesc(
-			prometheus.BuildFQName(namespace, "", "device_info"),
+			prometheus.BuildFQName(namespace, "device", "info"),
 			"device info",
 			props,
 			nil,
@@ -25,11 +25,11 @@ func newDeviceInfoCollector() hilinkCollector {
 	}
 }
 
-func (c *deviceInfoCollector) describe(ch chan<- *prometheus.Desc) {
+func (c *deviceCollector) describe(ch chan<- *prometheus.Desc) {
 	ch <- c.desc
 }
 
-func (c *deviceInfoCollector) collect(ctx *collectorContext) error {
+func (c *deviceCollector) collect(ctx *collectorContext) error {
 
 	log.Debug("Collecting device info")
 

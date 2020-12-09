@@ -8,7 +8,7 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-type trafficInfoCollector struct {
+type trafficCollector struct {
 	CurrentDownloadRate  *prometheus.Desc
 	CurrentUploadRate    *prometheus.Desc
 	TotalUpload          *prometheus.Desc
@@ -19,9 +19,9 @@ type trafficInfoCollector struct {
 	CurrentMonthUpload   *prometheus.Desc
 }
 
-func newTrafficInfoCollector() hilinkCollector {
+func newTrafficCollector() hilinkCollector {
 
-	return &trafficInfoCollector{
+	return &trafficCollector{
 		CurrentDownloadRate: prometheus.NewDesc(
 			prometheus.BuildFQName(namespace, "traffic", "current_download_rate"),
 			"CurrentDownloadRate (bits/s)",
@@ -73,7 +73,7 @@ func newTrafficInfoCollector() hilinkCollector {
 	}
 }
 
-func (c *trafficInfoCollector) describe(ch chan<- *prometheus.Desc) {
+func (c *trafficCollector) describe(ch chan<- *prometheus.Desc) {
 	ch <- c.CurrentDownloadRate
 	ch <- c.CurrentUploadRate
 	ch <- c.TotalUpload
@@ -84,7 +84,7 @@ func (c *trafficInfoCollector) describe(ch chan<- *prometheus.Desc) {
 	ch <- c.CurrentMonthUpload
 }
 
-func (c *trafficInfoCollector) collect(ctx *collectorContext) error {
+func (c *trafficCollector) collect(ctx *collectorContext) error {
 
 	log.Debug("Collecting traffic info")
 
