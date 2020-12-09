@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"regexp"
+	"strconv"
 	"sync"
 	"syscall"
 	"time"
@@ -139,4 +141,15 @@ func getValuesFromResponse(labelKeys []string, response hilink.XMLData) []string
 		labels = append(labels, fmt.Sprintf("%s", v))
 	}
 	return labels
+}
+
+var dbRegex = regexp.MustCompile(`(.*?)dBm?$`)
+
+func parseDbValue(str string) (float64, error) {
+	val := dbRegex.FindStringSubmatch(str)
+	if len(val) != 2 {
+		return 0, fmt.Errorf("unable to match decibel string value")
+	}
+
+	return strconv.ParseFloat(val[1], 64)
 }

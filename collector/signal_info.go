@@ -2,7 +2,6 @@ package collector
 
 import (
 	"fmt"
-	"strconv"
 
 	"github.com/prometheus/client_golang/prometheus"
 	log "github.com/sirupsen/logrus"
@@ -62,25 +61,25 @@ func (c *signalInfoCollector) collect(ctx *collectorContext) error {
 	}
 
 	if rssi, ok := response["rssi"]; ok {
-		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", rssi), 64); err == nil {
+		if f, err := parseDbValue(fmt.Sprintf("%s", rssi)); err == nil {
 			ctx.ch <- prometheus.MustNewConstMetric(c.RSSI, prometheus.GaugeValue, f)
 		}
 	}
 
 	if rsrp, ok := response["rsrp"]; ok {
-		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", rsrp), 64); err == nil {
+		if f, err := parseDbValue(fmt.Sprintf("%s", rsrp)); err == nil {
 			ctx.ch <- prometheus.MustNewConstMetric(c.RSRP, prometheus.GaugeValue, f)
 		}
 	}
 
 	if rsrq, ok := response["rsrq"]; ok {
-		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", rsrq), 64); err == nil {
+		if f, err := parseDbValue(fmt.Sprintf("%s", rsrq)); err == nil {
 			ctx.ch <- prometheus.MustNewConstMetric(c.RSRQ, prometheus.GaugeValue, f)
 		}
 	}
 
 	if sinr, ok := response["sinr"]; ok {
-		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", sinr), 64); err == nil {
+		if f, err := parseDbValue(fmt.Sprintf("%s", sinr)); err == nil {
 			ctx.ch <- prometheus.MustNewConstMetric(c.SINR, prometheus.GaugeValue, f)
 		}
 	}
