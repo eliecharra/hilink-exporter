@@ -23,6 +23,7 @@ var (
 	withTraffic = flag.Bool("traffic", true, "fetch traffic related stats")
 	withSignal  = flag.Bool("signal", true, "fetch signal related stats")
 	withWan     = flag.Bool("wan", true, "fetch wan related stats")
+	withStatus  = flag.Bool("status", true, "fetch status related stats")
 )
 
 func main() {
@@ -70,6 +71,7 @@ func createMetricsHandler() (http.Handler, error) {
 		EnableWan:     *withWan,
 		EnableTraffic: *withTraffic,
 		EnableSignal:  *withSignal,
+		EnableStatus:  *withStatus,
 	}
 	c := collector.NewCollector(opts)
 	registry := prometheus.NewRegistry()

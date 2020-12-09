@@ -28,6 +28,7 @@ type Options struct {
 	EnableSignal  bool
 	EnableTraffic bool
 	EnableWan     bool
+	EnableStatus  bool
 }
 
 type collectorContext struct {
@@ -117,6 +118,10 @@ func NewCollector(opts Options) prometheus.Collector {
 
 	if opts.EnableWan {
 		collectors = append(collectors, newWanCollector())
+	}
+
+	if opts.EnableStatus {
+		collectors = append(collectors, newStatusCollector())
 	}
 
 	c := collector{
