@@ -95,13 +95,13 @@ func (c *trafficCollector) collect(ctx *collectorContext) error {
 
 	if CurrentDownloadRate, ok := response["CurrentDownloadRate"]; ok {
 		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", CurrentDownloadRate), 64); err == nil {
-			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentDownloadRate, prometheus.CounterValue, f)
+			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentDownloadRate, prometheus.GaugeValue, f)
 		}
 	}
 
 	if CurrentUploadRate, ok := response["CurrentUploadRate"]; ok {
 		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", CurrentUploadRate), 64); err == nil {
-			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentUploadRate, prometheus.CounterValue, f)
+			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentUploadRate, prometheus.GaugeValue, f)
 		}
 	}
 
@@ -119,13 +119,13 @@ func (c *trafficCollector) collect(ctx *collectorContext) error {
 
 	if CurrentUpload, ok := response["CurrentUpload"]; ok {
 		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", CurrentUpload), 64); err == nil {
-			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentUpload, prometheus.CounterValue, f)
+			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentUpload, prometheus.GaugeValue, f)
 		}
 	}
 
 	if CurrentDownload, ok := response["CurrentDownload"]; ok {
 		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", CurrentDownload), 64); err == nil {
-			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentDownload, prometheus.CounterValue, f)
+			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentDownload, prometheus.GaugeValue, f)
 		}
 	}
 
@@ -141,13 +141,13 @@ func (c *trafficCollector) collect(ctx *collectorContext) error {
 
 	if CurrentMonthDownload, ok := response["CurrentMonthDownload"]; ok {
 		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", CurrentMonthDownload), 64); err == nil {
-			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentMonthDownload, prometheus.CounterValue, f, MonthLastClearTime)
+			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentMonthDownload, prometheus.GaugeValue, f, MonthLastClearTime)
 		}
 	}
 
 	if CurrentMonthUpload, ok := response["CurrentMonthUpload"]; ok {
 		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", CurrentMonthUpload), 64); err == nil {
-			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentMonthUpload, prometheus.CounterValue, f, MonthLastClearTime)
+			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentMonthUpload, prometheus.GaugeValue, f, MonthLastClearTime)
 		}
 	}
 

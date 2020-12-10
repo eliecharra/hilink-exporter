@@ -123,19 +123,19 @@ func (c *statusCollector) collect(ctx *collectorContext) error {
 
 	if ConnectionStatus, ok := response["ConnectionStatus"]; ok {
 		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", ConnectionStatus), 64); err == nil {
-			ctx.ch <- prometheus.MustNewConstMetric(c.ConnectionStatus, prometheus.CounterValue, f)
+			ctx.ch <- prometheus.MustNewConstMetric(c.ConnectionStatus, prometheus.GaugeValue, f)
 		}
 	}
 
 	if CurrentNetworkTypeEx, ok := response["CurrentNetworkTypeEx"]; ok {
 		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", CurrentNetworkTypeEx), 64); err == nil {
-			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentNetworkTypeEx, prometheus.CounterValue, f)
+			ctx.ch <- prometheus.MustNewConstMetric(c.CurrentNetworkTypeEx, prometheus.GaugeValue, f)
 		}
 	}
 
 	if WifiStatus, ok := response["WifiStatus"]; ok {
 		if f, err := strconv.ParseFloat(fmt.Sprintf("%s", WifiStatus), 64); err == nil {
-			ctx.ch <- prometheus.MustNewConstMetric(c.WifiStatus, prometheus.CounterValue, f)
+			ctx.ch <- prometheus.MustNewConstMetric(c.WifiStatus, prometheus.GaugeValue, f)
 		}
 	}
 
