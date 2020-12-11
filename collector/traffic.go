@@ -24,13 +24,13 @@ func newTrafficCollector() hilinkCollector {
 	return &trafficCollector{
 		CurrentDownloadRate: prometheus.NewDesc(
 			prometheus.BuildFQName(namespace, "traffic", "current_download_rate"),
-			"CurrentDownloadRate (bits/s)",
+			"CurrentDownloadRate (bytes/s)",
 			nil,
 			nil,
 		),
 		CurrentUploadRate: prometheus.NewDesc(
 			prometheus.BuildFQName(namespace, "traffic", "current_upload_rate"),
-			"CurrentUploadRate (bits/s)",
+			"CurrentUploadRate (bytes/s)",
 			nil,
 			nil,
 		),
