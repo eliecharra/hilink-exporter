@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"net/http"
-	"os"
 
 	"github.com/eliecharra/hilink-exporter/collector"
 	"github.com/eliecharra/hilink-exporter/logger"
@@ -35,7 +34,6 @@ func main() {
 	err := start()
 	if err != nil {
 		log.Fatal(err)
-		os.Exit(1)
 	}
 }
 
