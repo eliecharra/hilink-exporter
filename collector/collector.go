@@ -72,7 +72,7 @@ func (c *collector) Collect(ch chan<- prometheus.Metric) {
 		}).Debug("Connecting")
 		client, err := hilink.NewClient(clientOptions...)
 		if err != nil {
-			log.Fatal("Unable to contact device: %s", err)
+			log.Fatalf("Unable to contact device: %s", err)
 		}
 		go func() {
 			<-sigChannel
