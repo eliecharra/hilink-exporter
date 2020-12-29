@@ -37,7 +37,7 @@ func newSignalCollector() hilinkCollector {
 		),
 		SINR: prometheus.NewDesc(
 			prometheus.BuildFQName(namespace, "signal", "sinr"),
-			"Signal Noise Ratio (dB)",
+			"Signal Noise Ratio (dB, max 30)",
 			nil,
 			nil,
 		),
