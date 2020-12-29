@@ -48,7 +48,7 @@ hilink_traffic_total_upload 8.9835791e+07
 hilink_wan{WanIPAddress="",WanIPv6Address=""} 1
 ```
 
-## Supported devices
+## Tested devices
 
 :warning: list not exhaustive
 
