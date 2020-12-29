@@ -6,7 +6,6 @@ import (
 	"os/signal"
 	"regexp"
 	"strconv"
-	"strings"
 	"sync"
 	"syscall"
 	"time"
@@ -148,12 +147,14 @@ func getValuesFromResponse(labelKeys []string, response hilink.XMLData) []string
 	return labels
 }
 
-var dbRegex = regexp.MustCompile(`(.*?)dBm?$`)
+// .*? = match every character in lazy mode
+// (-?\d+(?:[.]\d+)?) = match and capture floating point value with optional leading - sign
+// \s? = allow optional whitespace
+// dBm? = match dB or dBm string
+// $ = end of string
+var dbRegex = regexp.MustCompile(`.*?(-?\d+(?:[.]\d+)?)\s?dBm?$`)
 
 func parseDbValue(str string) (float64, error) {
-	if strings.Contains(str, "&gt;=") {
-		str = strings.Replace(str, "&gt;=", "", 1)
-	}
 	val := dbRegex.FindStringSubmatch(str)
 	if len(val) != 2 {
 		return 0, fmt.Errorf("unable to match decibel string value")

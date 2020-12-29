@@ -20,6 +20,21 @@ func Test_parseDbValue(t *testing.T) {
 			want: -55,
 		},
 		{
+			name: "test float positive value in dB",
+			str:  "55.74dB",
+			want: 55.74,
+		},
+		{
+			name: "test float negative value in dB",
+			str:  "-55.74dB",
+			want: -55.74,
+		},
+		{
+			name: "test float negative value in dB with whitespace",
+			str:  "-55.7 dB",
+			want: -55.7,
+		},
+		{
 			name: "test positive value in dBm",
 			str:  "55dBm",
 			want: 55,
